@@ -18,13 +18,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Product</a>
+            <a class="nav-link active" aria-current="page" href="/products">Product</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Category</a>
+            <a class="nav-link" href="/categories">Category</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Supplier</a>
+            <a class="nav-link" href="/customers">Customer</a>
             </li>
         </ul>
         </div>

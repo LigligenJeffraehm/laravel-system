@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();//date created and date modified
             $table->string('productName', length: 200);
             $table->decimal('price', total: 8, places:2);
+            $table->foreignId('category_id')->constrained(); //migration to setup
             $table->boolean('availability');
         });
     }

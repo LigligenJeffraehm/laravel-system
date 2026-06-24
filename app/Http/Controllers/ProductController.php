@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     /**
@@ -11,7 +13,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all(); //select all from table products
+        $products = DB::table('products')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select('products.*', 'categories.categoryName')//or categories.*
+        ->get();
         return view ('productList', compact('products'));
     }
 
@@ -19,8 +24,9 @@ class ProductController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('productCreate');
+    { 
+        $categories = Category::all();//select * from categories
+        return view('productCreate', compact('categories'));
     }
 
     /**
@@ -28,7 +34,7 @@ class ProductController extends Controller
      * create record/s
      */
     public function store(Request $request)
-    {
+    {   
         Product::create($request->all());
         return redirect()->route('products.index');
     }
@@ -46,9 +52,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('productEdit',compact('product'));
+        $categories = Category::all();
+        return view('productEdit', compact('product','categories'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
@@ -61,8 +68,9 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
