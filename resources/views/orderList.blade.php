@@ -22,21 +22,23 @@
             </tr>
         </thead>
         <tbody>
+
             <tr>
             @foreach($orders as $order)
                     <td>{{$order->customerName}}</td>
                     <td>{{$order->productName}}</td>
-                    <td>{{$order->price}}</td>
-                    <td>{{order->quantity}}</td>
+                    <td>{{$order->Quantity}}</td>
             <td>
-                            <form action="{{route('orders.destroy', $order->id)}}" method = "post">
-                                <a href="{{route('orders.edit', $order->id)}}" class="btn btn-warning">Edit</a>
+                
+                <form action="{{route('orders.destroy', $order->id)}}" method = "post">
+                        <a href="{{route('orders.edit', $order->id)}}" class="btn btn-warning">Edit</a>
                                 @csrf
                                 @method('DELETE')
-                                <button type = "submit" class = "btn btn-danger">Delete</button>
-                            </form>
+                    <button type = "submit" class = "btn btn-danger">Delete</button>
+                </form>
             </td>
             @endforeach
+        
             </tr>
         </tbody>
         </table>

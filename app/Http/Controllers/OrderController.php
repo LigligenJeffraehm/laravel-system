@@ -17,13 +17,13 @@ class OrderController extends Controller
     public function index()
     {
 
-        $orders = DB::table('orders')
+         $orders = DB::table('orders')
         ->join('customers', 'orders.customer_id', '=', 'customers.id')
-        ->join('products','orders.product_id', '=', 'products.id')
-        ->select('orders.*', 'products.productName', 'customers.customerName')
+        ->join('products', 'orders.product_id', '=', 'products.id')
+        ->select('orders.*', 'products.productName', 'products.price', 'customers.customerName')
         ->get();
 
-        return view ('orderList', compact('orders'));
+    return view('orderList', compact('orders'));
     }
 
     /**
@@ -34,7 +34,7 @@ class OrderController extends Controller
         
         $products = Product::all();
         $customers = Customer::all();
-        return view('orderList', compact('products', 'customers'));
+        return view('orderCreate', compact('products', 'customers'));
     }
 
     /**
@@ -42,9 +42,9 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        Product::create($request ->all());
-        Customer::create($request->all());
-        return redirect()->route(orders.index());
+       
+        Order::create($request -> all());
+        return redirect()->route('orders.index');
     }
 
     /**
@@ -60,7 +60,9 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+         $customers = Customer::all();
+         $products = Product::all();
+        return view('productEdit', compact('customers', 'products'));
     }
 
     /**
@@ -68,7 +70,8 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+          $order->update($request->all());
+        return redirect()->route('products.index');
     }
 
     /**
@@ -76,6 +79,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+         $order->delete();
+        return redirect()->route('orders.index');
     }
 }

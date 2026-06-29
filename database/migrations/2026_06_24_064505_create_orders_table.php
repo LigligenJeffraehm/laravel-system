@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-         
+            $table->id();
             $table->timestamps();
             $table->decimal('Quantity', total:8, places:2);
             $table->foreignId('customer_id')->constrained(); 
             $table->foreignId('product_id')->constrained(); 
 
-            $table->primary(['customer_id', 'product_id']);
+            
         });
     }
 
