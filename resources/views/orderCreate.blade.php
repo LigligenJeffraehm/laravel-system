@@ -1,5 +1,6 @@
 @extends('masterLayout')
 
+@extends('Master Layout')
 @section('title', 'New Order')
 
 @section('content')

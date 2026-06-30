@@ -60,9 +60,9 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-         $customers = Customer::all();
-         $products = Product::all();
-        return view('productEdit', compact('customers', 'products'));
+        $customers=Customer::all();
+        $products=Product::all();
+        return view('orderEdit', compact('order','products','customers'));
     }
 
     /**
@@ -70,8 +70,8 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-          $order->update($request->all());
-        return redirect()->route('products.index');
+        $order->update($request->all());
+        return redirect()->route('orders.index');
     }
 
     /**

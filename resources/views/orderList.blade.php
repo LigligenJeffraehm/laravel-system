@@ -7,17 +7,15 @@
 <a href="{{route('orders.create')}}" class="btn btn-primary">New Order</a>
 
 <div class="container">
-    <div class="row">\
+    <div class="row">
     <div class="col-md-8">
-        <h2>Menu</h2>
+        <h2>Order</h2>
         <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Customer</th>
                 <th scope="col">Product</th>
-                <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
